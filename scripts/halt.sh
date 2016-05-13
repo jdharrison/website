@@ -5,3 +5,6 @@ sudo systemctl stop websites
 if [ -f /etc/systemd/system/websites.service ]; then
   sudo rm /etc/systemd/system/websites.service
 fi
+
+# Update systemd of removal
+sudo systemctl daemon-reload
