@@ -4,5 +4,9 @@
   "description": "Webserver for shared website hosting.",
   "main": "app.js",
   "author": "Jacob D. Harrison <this@jacobdharrison.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jsonfile": "^2.3.0"
+  }
 }
