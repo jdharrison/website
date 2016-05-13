@@ -2,7 +2,7 @@ var express = require("express");
 var jsonfile = require("jsonfile");
 var app = express();
 
-jsonfile.readFile("config.json", function(err, config) {
+jsonfile.readFile("/opt/websites/config.json", function(err, config) {
   if(err) {
     console.error("Error trying to load config data at ./config.json.");
     console.error(err);

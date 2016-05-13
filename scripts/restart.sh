@@ -1,2 +1,3 @@
 # Restart background service
-systemd restart websites
+sudo systemctl daemon-reload
+sudo systemctl restart websites

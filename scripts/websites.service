@@ -1,0 +1,16 @@
+[Unit]
+Description=Server built for hosting multiple websites.
+
+[Service]
+ExecStart=/usr/bin/nodejs /opt/websites/app.js
+ExecStop=/usr/bin/killall /usr/bin/nodejs
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+# User=nobody
+# Group=nobody
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
