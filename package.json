@@ -1,11 +1,8 @@
 {
-  "name": "jacobdharrison",
+  "name": "websites",
   "version": "1.0.0",
-  "description": "Personal website.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  "description": "Webserver for shared website hosting.",
+  "main": "app.js",
+  "author": "Jacob D. Harrison <this@jacobdharrison.com>",
+  "license": "MIT"
 }
