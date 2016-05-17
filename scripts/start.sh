@@ -1,5 +1,5 @@
 # Make sure node dependencies are update to date
-npm update --prefix /opt/websites
+sudo npm update --prefix /opt/websites
 
 # Initialize background service file
 if [ ! -f /etc/systemd/system/websites.service ]; then
