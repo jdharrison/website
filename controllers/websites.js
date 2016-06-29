@@ -10,19 +10,28 @@ router.post('/', function(req, res) {
   {
     var route = req.body['route'];
     var media = req.body['media'];
-    
-    if(route == null || media == null)
+    var remove = req.body['remove'] == undefined ? false : req.body['remove'];
+
+    if(route == null || remove == false && media == null)
     {
       res.error("Invalid parameters passed.");
     }
     else
     {
-      websitesModel.addWebsite(route,media);
+      if(remove)
+      {
+        websitesModel.removeWebsite(route);
+      }
+      else
+      {
+        websitesModel.addWebsite(route,media);
+      }
       res.send(websitesModel.getWebsites());
     }
   }
 });
 
+/* GET websites */
 router.get('/', function(req, res) {
   if(auth.hasAuth(req.connection.remoteAddress))
   {

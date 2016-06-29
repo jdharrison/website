@@ -14,5 +14,16 @@ function addWebsite(route, media)
   persist.storage.setItem(storage_key, websites);
 }
 
+function removeWebsite(route)
+{
+  var websites = getWebsites();
+  if(websites[route] != undefined)
+  {
+    delete websites[route];
+    persist.storage.setItem(storage_key, websites);
+  }
+}
+
 exports.getWebsites = getWebsites;
 exports.addWebsite = addWebsite;
+exports.removeWebsite = removeWebsite;

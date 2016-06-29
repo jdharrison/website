@@ -2,14 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var auth = require('../models/auth');
+var websitesModel = require('../models/websites');
 
 /* GET admin */
 router.get('/', function(req, res) {
-  var ip = req.connection.remoteAddress;
-
-  if(auth.hasAuth(ip))
+  if(auth.hasAuth(req.connection.remoteAddress))
   {
-    res.render('admin', { title: 'Websites ~ Control Panel' });
+    res.render('admin', { title: 'Websites ~ Control Panel', websites: websitesModel.getWebsites() });
   }
   else
   {

@@ -2,16 +2,46 @@ extends layout
 
 block content
   div(id='header' class='header')
-    h1 Admin Tool
-    button(id='btnNewWebsite', onclick='createWebsite();') New Website
+    h2 Website Routes:
+    button(id='btnNewWebsite', onclick='createWebsite();') New/Update Route
+    button(id='btnRemoveWebsite', onclick='removeWebsite();') Remove Route
     br
     br
-    h2 Websites:
-  div(id='content', class='content')
+  div(id='websites', class='websites')
   script.
+
+    syncWebsites();
+
+    function syncWebsites()
+    {
+      $.get('/websites', function (result) {
+        var websites = '';
+        for (var index in result) {
+          var website = result[index];
+          websites += '- <b>' + website.route + '</b> (' + website.media + ') <br>';
+        }
+
+        $('#websites').html(websites == '' ? '<h4>No Routes!</h4>' : websites);
+      });
+    }
+
+    function removeWebsite()
+    {
+      bootbox.prompt("Which route do you want to remove?", function(result)
+      {
+        if(result != null)
+        {
+          $.post('/websites', {'route': result, 'remove': true}, function () {
+            bootbox.alert('The route has been removed: "' + result + '".');
+            syncWebsites();
+          });
+        }
+      });
+    }
+
     function createWebsite() {
       bootbox.dialog({
-        title: 'New Website',
+        title: 'New/Update Route',
         message:
               '<label for="Route">Website Route</label> <br>' +
               '<label>Forward to this route on the server, e.g.: "localhost:3000/example".</label>' +
@@ -29,12 +59,13 @@ block content
               var media = $('#media').val();
               if(route == null || media == null)
               {
-                bootbox.alert("Invalid data in form, make sure to provide website route and media location!");
+                bootbox.alert('Invalid data in form, make sure to provide website route and media location!');
               }
               else
               {
-                $.post("/websites", {"route": route, "media": media}, function() {
-                  bootbox.alert('New website has been created: "' + route + '". Your media storage is at: "' + media + '".');
+                $.post('/websites', {'route': route, 'media': media}, function() {
+                  bootbox.alert('New route has been created: "' + route + '". Your media storage is at: "' + media + '".');
+                  syncWebsites();
                 });
               }
             }
