@@ -13,31 +13,29 @@ block content
       bootbox.dialog({
         title: 'New Website',
         message:
-              '<label for="domain">Domain name:</label> ' +
-              '<input id="domain" name="domain" type="text" placeholder="example.com" class="form-control input-md">' +
-              '<label>Forward this domain from where it is hosted to the defined server route below.</label>' +
-              '<br><br>' +
-              '<label for="Route">Server route:</label> ' +
-              '<input id="route" name="route" type="text" placeholder="example" class="form-control input-md">' +
+              '<label for="Route">Website Route</label> <br>' +
               '<label>Forward to this route on the server, e.g.: "localhost:3000/example".</label>' +
+              '<input id="route" name="route" type="text" placeholder="example" class="form-control input-md">' +
               '<br><br>' +
-              '<label for="media">Media location:</label> ' +
-              '<input id="media" name="media" type="text" placeholder="https://storage.googleapis.com/example_website" class="form-control input-md">' +
-              '<label>Make sure the media is accessible to the public, and has an index.html.</label>',
+              '<label for="media">Media Location</label> ' +
+              '<label>Must be accessible to the public, and have at minimum an index.html.</label>' +
+              '<input id="media" name="media" type="text" placeholder="https://storage.googleapis.com/example_website" class="form-control input-md">',
           buttons: {
           success: {
             label: 'Save',
             className: 'btn-success',
             callback: function() {
-              var domain = $('#domain').val();
+              var route = $('#route').val();
               var media = $('#media').val();
-              if(domain == null || media == null)
+              if(route == null || media == null)
               {
-                bootbox.alert("Invalid data in form, make sure to provide domain name and media location!");
+                bootbox.alert("Invalid data in form, make sure to provide website route and media location!");
               }
               else
               {
-                bootbox.alert('New website has been created: "' + domain + '". Your media storage is at: "' + media + '".');
+                $.post("/websites", {"route": route, "media": media}, function() {
+                  bootbox.alert('New website has been created: "' + route + '". Your media storage is at: "' + media + '".');
+                });
               }
             }
           }
