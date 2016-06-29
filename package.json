@@ -2,7 +2,7 @@
   "name": "websites",
   "version": "0.0.1",
   "scripts": {
-    "start": "nodejs ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "express": "~4.0.0",

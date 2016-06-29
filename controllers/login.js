@@ -1,3 +1,4 @@
+//TODO: better username and password logic
 const admin_username = 'admin';
 const admin_password = 'password';
 
@@ -11,6 +12,7 @@ router.post('/', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
+  //TODO: better username and password logic
   if(username == admin_username && password == admin_password)
   {
     auth.add(req.connection.remoteAddress);

@@ -1,10 +1,46 @@
 extends layout
 
 block content
-  div(id="header" class="header")
-    h1 Admin Tool 
-    button(class="new_website") New Website
-    br 
+  div(id='header' class='header')
+    h1 Admin Tool
+    button(id='btnNewWebsite', onclick='createWebsite();') New Website
+    br
     br
     h2 Websites:
-  div(id="content", class="content")
+  div(id='content', class='content')
+  script.
+    function createWebsite() {
+      bootbox.dialog({
+        title: 'New Website',
+        message:
+              '<label for="domain">Domain name:</label> ' +
+              '<input id="domain" name="domain" type="text" placeholder="example.com" class="form-control input-md">' +
+              '<label>Forward this domain from where it is hosted to the defined server route below.</label>' +
+              '<br><br>' +
+              '<label for="Route">Server route:</label> ' +
+              '<input id="route" name="route" type="text" placeholder="example" class="form-control input-md">' +
+              '<label>Forward to this route on the server, e.g.: "localhost:3000/example".</label>' +
+              '<br><br>' +
+              '<label for="media">Media location:</label> ' +
+              '<input id="media" name="media" type="text" placeholder="https://storage.googleapis.com/example_website" class="form-control input-md">' +
+              '<label>Make sure the media is accessible to the public, and has an index.html.</label>',
+          buttons: {
+          success: {
+            label: 'Save',
+            className: 'btn-success',
+            callback: function() {
+              var domain = $('#domain').val();
+              var media = $('#media').val();
+              if(domain == null || media == null)
+              {
+                bootbox.alert("Invalid data in form, make sure to provide domain name and media location!");
+              }
+              else
+              {
+                bootbox.alert('New website has been created: "' + domain + '". Your media storage is at: "' + media + '".');
+              }
+            }
+          }
+        }
+      });
+    }
