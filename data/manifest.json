@@ -1,0 +1,7 @@
+{
+	"model":"models",
+	"view":"views",
+	"controller":"controllers",
+	"view_engine": "jade",
+	"admin_pages": ["basic", "user", "control"]
+}

@@ -1,0 +1,24 @@
+{
+	"basic": {
+		"name": "default",
+		"port": 3000,
+		"model": "models/",
+		"view": "view/",
+		"controller": "controller/"
+	},
+	"user": {
+		"users": [{
+			"username": "admin",
+			"password": "password",
+			"page_restrictions": []
+		}]
+	},
+	"control": {
+		"actions": [
+			"reload",
+			"restart",
+			"shutdown",
+			"logout"
+		]
+	}
+}
